@@ -19,7 +19,7 @@ public class ControlGame : MonoBehaviour {
 
 	private bool recentlySpawnedGold = false;
 
-	float spawnFrequency = 1.5f;
+	float spawnFrequency = 1.2f;
 	float timeToAct = 0.0f;
 	float spawnSilverTime = 10.0f;
 	float stopSpawningTime = 5.0f;
@@ -46,20 +46,22 @@ public class ControlGame : MonoBehaviour {
 			recentlySpawnedGold = true;
 			print (Time.time);
 			print (myState);
+			print (score);
 		}
 
-		else if (Time.time >= timeToAct && Time.time < spawnSilverTime + stopSpawningTime && bronzeCount < 2) {
+		else if (Time.time >= timeToAct && Time.time < spawnSilverTime + stopSpawningTime && bronzeCount < 4) {
 			Instantiate (bronzeCube, new Vector3 (Random.Range (-5f, 5f), 0, Random.Range (-2f, 7f)), Quaternion.identity);
 			timeToAct += spawnFrequency;
 			bronzeCount++;
 			recentlySpawnedGold = false;
 			print (Time.time);
 			print (myState);
+			print (score);
 		}
 		//If it's time to act and not yet spawning silver and there are less than 4 bronze cubes spawned:
 		//spawn the cube anywhere in this range and add the spawn frequency to time to act so the game tracks what time has passed
 
-		else if (Time.time >= timeToAct && Time.time < spawnGoldTime + stopSpawningTime && bronzeCount >= 2) {
+		else if (Time.time >= timeToAct && Time.time < spawnGoldTime + stopSpawningTime && bronzeCount >= 4) {
 			myState = GameState.Silver;
 			Instantiate (silverCube, new Vector3 (Random.Range (-5f, 5f), 0, Random.Range (-2f, 7f)), Quaternion.identity);
 			timeToAct += spawnFrequency;
@@ -67,6 +69,7 @@ public class ControlGame : MonoBehaviour {
 			recentlySpawnedGold = false;
 			print (Time.time);
 			print (myState);
+			print (score);
 		} 
 
 
